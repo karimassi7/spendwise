@@ -14,7 +14,8 @@ SpendWise is a command-line personal finance application written in Python. It h
 
 ## Architecture
 
-The project is organized into clear layers:
+The application packages live directly under `src` and are organized into clear
+layers:
 
 - `domain`: Financial classes and validation rules.
 - `repositories`: MySQL persistence and data retrieval.
@@ -25,20 +26,27 @@ The project is organized into clear layers:
 
 ## Run the Application
 
-From the directory containing the `spendwise` package, run:
+Create a virtual environment and install the project from the repository root:
 
 ```powershell
-python -m spendwise.presentation.main
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e .
+```
+
+Then run the application with either entry point:
+
+```powershell
+python -m main
+spendwise
 ```
 
 ## Database Setup
 
-Install the dependencies and initialize the database from the directory containing
-the `spendwise` package:
+Initialize the database after installing the project:
 
 ```powershell
-pip install -r spendwise/requirements.txt
-python -m spendwise.database.setup_database
+python -m database.setup_database
 ```
 
 The default connection is `root` with an empty password on

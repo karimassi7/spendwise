@@ -1,8 +1,8 @@
 from datetime import date
 from decimal import Decimal
 
-from spendwise.domain.account import Account
-from spendwise.domain.spending_category import Category
+from domain.account import Account
+from domain.spending_category import Category
 
 
 class Transaction:

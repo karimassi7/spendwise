@@ -1,7 +1,7 @@
 """MySQL persistence for spending categories."""
 
-from spendwise.database.mysql_connection import get_connection
-from spendwise.domain.spending_category import Category
+from database.mysql_connection import get_connection
+from domain.spending_category import Category
 
 
 class CategoryRepository:

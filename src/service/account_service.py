@@ -1,7 +1,7 @@
 from decimal import Decimal
 
-from spendwise.domain.account import Account
-from spendwise.repositories.account_repository import AccountRepository
+from domain.account import Account
+from repositories.account_repository import AccountRepository
 
 
 class AccountService:

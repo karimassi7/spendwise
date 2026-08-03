@@ -4,7 +4,7 @@ from pathlib import Path
 
 from mysql.connector import Error
 
-from spendwise.database.mysql_connection import get_connection
+from database.mysql_connection import get_connection
 
 
 def initialize_database() -> None:

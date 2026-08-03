@@ -1,10 +1,10 @@
 from datetime import date
 from decimal import Decimal
 
-from spendwise.domain.budget import Budget
-from spendwise.repositories.budget_repository import BudgetRepository
-from spendwise.repositories.category_repository import CategoryRepository
-from spendwise.repositories.transaction_repository import TransactionRepository
+from domain.budget import Budget
+from repositories.budget_repository import BudgetRepository
+from repositories.category_repository import CategoryRepository
+from repositories.transaction_repository import TransactionRepository
 
 
 class BudgetService:

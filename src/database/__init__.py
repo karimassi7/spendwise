@@ -1,6 +1,6 @@
 """Database utilities for SpendWise."""
 
-from spendwise.database.mysql_connection import (
+from database.mysql_connection import (
     database_connection,
     get_connection,
     test_connection,

@@ -1,11 +1,11 @@
 from decimal import Decimal
 
-from spendwise.domain.account import Account
-from spendwise.domain.budget import Budget
-from spendwise.domain.savings_goal import SavingsGoal
-from spendwise.domain.spending_category import Category
-from spendwise.domain.transaction import Transaction
-from spendwise.domain.user_profile import UserProfile
+from domain.account import Account
+from domain.budget import Budget
+from domain.savings_goal import SavingsGoal
+from domain.spending_category import Category
+from domain.transaction import Transaction
+from domain.user_profile import UserProfile
 
 
 def format_money(amount: Decimal, currency: str) -> str:

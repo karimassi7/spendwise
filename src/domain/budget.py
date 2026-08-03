@@ -1,7 +1,7 @@
 from datetime import date
 from decimal import Decimal
 
-from spendwise.domain.spending_category import Category
+from domain.spending_category import Category
 
 
 class Budget:

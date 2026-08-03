@@ -1,18 +1,18 @@
-from spendwise.presentation.cli import CLI
-from spendwise.repositories.account_repository import AccountRepository
-from spendwise.repositories.budget_repository import BudgetRepository
-from spendwise.repositories.category_repository import CategoryRepository
-from spendwise.repositories.profile_repository import ProfileRepository
-from spendwise.repositories.savings_goal_repository import (
+from presentation.cli import CLI
+from repositories.account_repository import AccountRepository
+from repositories.budget_repository import BudgetRepository
+from repositories.category_repository import CategoryRepository
+from repositories.profile_repository import ProfileRepository
+from repositories.savings_goal_repository import (
     SavingsGoalRepository,
 )
-from spendwise.repositories.transaction_repository import TransactionRepository
-from spendwise.service.account_service import AccountService
-from spendwise.service.budget_service import BudgetService
-from spendwise.service.category_service import CategoryService
-from spendwise.service.profile_service import ProfileService
-from spendwise.service.savings_goal_service import SavingsGoalService
-from spendwise.service.transaction_service import TransactionService
+from repositories.transaction_repository import TransactionRepository
+from service.account_service import AccountService
+from service.budget_service import BudgetService
+from service.category_service import CategoryService
+from service.profile_service import ProfileService
+from service.savings_goal_service import SavingsGoalService
+from service.transaction_service import TransactionService
 
 
 def create_cli() -> CLI:
@@ -58,5 +58,10 @@ def create_cli() -> CLI:
     )
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Start the SpendWise command-line application."""
     create_cli().run()
+
+
+if __name__ == "__main__":
+    main()

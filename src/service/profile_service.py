@@ -1,7 +1,7 @@
 from decimal import Decimal
 
-from spendwise.domain.user_profile import UserProfile
-from spendwise.repositories.profile_repository import ProfileRepository
+from domain.user_profile import UserProfile
+from repositories.profile_repository import ProfileRepository
 
 
 class ProfileService:

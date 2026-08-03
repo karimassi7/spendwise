@@ -1,12 +1,12 @@
 from datetime import date
 from decimal import Decimal, InvalidOperation
 
-from spendwise.service.account_service import AccountService
-from spendwise.service.budget_service import BudgetService
-from spendwise.service.category_service import CategoryService
-from spendwise.service.profile_service import ProfileService
-from spendwise.service.savings_goal_service import SavingsGoalService
-from spendwise.service.transaction_service import TransactionService
+from service.account_service import AccountService
+from service.budget_service import BudgetService
+from service.category_service import CategoryService
+from service.profile_service import ProfileService
+from service.savings_goal_service import SavingsGoalService
+from service.transaction_service import TransactionService
 
 from .formatter import (
     display_accounts,

@@ -4,7 +4,7 @@ from collections.abc import Callable
 
 import pytest
 
-from spendwise.presentation.menu import (
+from presentation.menu import (
     CLEAR_SCREEN,
     display_account_menu,
     display_budget_menu,

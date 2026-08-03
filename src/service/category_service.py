@@ -1,5 +1,5 @@
-from spendwise.domain.spending_category import Category
-from spendwise.repositories.category_repository import CategoryRepository
+from domain.spending_category import Category
+from repositories.category_repository import CategoryRepository
 
 
 class CategoryService:

@@ -1,12 +1,12 @@
 from datetime import date, datetime
 from decimal import Decimal
 
-from spendwise.domain.account import Account
-from spendwise.domain.spending_category import Category
-from spendwise.domain.transaction import Transaction
-from spendwise.repositories.account_repository import AccountRepository
-from spendwise.repositories.category_repository import CategoryRepository
-from spendwise.repositories.transaction_repository import TransactionRepository
+from domain.account import Account
+from domain.spending_category import Category
+from domain.transaction import Transaction
+from repositories.account_repository import AccountRepository
+from repositories.category_repository import CategoryRepository
+from repositories.transaction_repository import TransactionRepository
 
 
 class TransactionService:

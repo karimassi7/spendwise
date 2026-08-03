@@ -1,7 +1,7 @@
 from decimal import Decimal
 
-from spendwise.database.mysql_connection import get_connection
-from spendwise.domain.account import Account
+from database.mysql_connection import get_connection
+from domain.account import Account
 
 
 class AccountRepository:

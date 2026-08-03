@@ -1,10 +1,10 @@
 from datetime import date
 from decimal import Decimal
 
-from spendwise.database.mysql_connection import get_connection
-from spendwise.domain.transaction import Transaction
-from spendwise.repositories.account_repository import AccountRepository
-from spendwise.repositories.category_repository import CategoryRepository
+from database.mysql_connection import get_connection
+from domain.transaction import Transaction
+from repositories.account_repository import AccountRepository
+from repositories.category_repository import CategoryRepository
 
 
 class TransactionRepository:

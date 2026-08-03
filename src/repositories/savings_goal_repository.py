@@ -3,8 +3,8 @@
 from datetime import date
 from decimal import Decimal
 
-from spendwise.database.mysql_connection import get_connection
-from spendwise.domain.savings_goal import SavingsGoal
+from database.mysql_connection import get_connection
+from domain.savings_goal import SavingsGoal
 
 
 class SavingsGoalRepository:

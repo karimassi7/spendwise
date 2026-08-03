@@ -1,8 +1,8 @@
 from datetime import date, datetime
 from decimal import Decimal
 
-from spendwise.domain.savings_goal import SavingsGoal
-from spendwise.repositories.savings_goal_repository import SavingsGoalRepository
+from domain.savings_goal import SavingsGoal
+from repositories.savings_goal_repository import SavingsGoalRepository
 
 
 class SavingsGoalService:
