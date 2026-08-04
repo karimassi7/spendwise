@@ -7,7 +7,7 @@ USE spendwise;
 CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    currency VARCHAR(10) NOT NULL,
+    currency ENUM('USD', 'LBP') NOT NULL,
     monthly_income DECIMAL(12,2) NOT NULL
 ) ENGINE=InnoDB;
 

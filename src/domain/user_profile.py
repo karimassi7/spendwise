@@ -5,21 +5,26 @@ class UserProfile:
     """Represent the application user and financial preferences."""
 
     def __init__(self, name: str, currency: str, user_id: int, monthly_income: Decimal):
-        if not name.strip():
+        name = name.strip()
+
+        if not name:
             raise ValueError("Name cannot be empty.")
 
-        if not currency.strip():
-            raise ValueError("Currency cannot be empty.")
+        if name.isdigit():
+            raise ValueError("Name cannot be a number.")
+        
+        if currency not in  ("USD", "LBP"):
+            raise ValueError("currency should be LBP OR USD!!")
 
         if user_id <= 0:
             raise ValueError("User ID must be greater than zero.")
 
         monthly_income = Decimal(str(monthly_income))
 
-        if monthly_income < Decimal(0):
-            raise ValueError("Monthly income cannot be negative.")
+        if monthly_income <= Decimal(0):
+            raise ValueError("Monthly income must be greater than zero.")
 
-        self.name = name.strip()
+        self.name = name
         self.currency = currency.strip().upper()
         self.user_id = user_id
         self.monthly_income = monthly_income
