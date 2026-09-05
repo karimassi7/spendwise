@@ -6,9 +6,11 @@ USE spendwise;
 
 CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
     name VARCHAR(100) NOT NULL,
-    currency ENUM('USD', 'LBP') NOT NULL,
-    monthly_income DECIMAL(12,2) NOT NULL
+    currency ENUM('USD', 'LBP') NOT NULL DEFAULT 'USD',
+    monthly_income DECIMAL(12,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS accounts (

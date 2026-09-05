@@ -4,7 +4,15 @@ from decimal import Decimal
 class UserProfile:
     """Represent the application user and financial preferences."""
 
-    def __init__(self, name: str, currency: str, user_id: int, monthly_income: Decimal):
+    def __init__(
+        self,
+        name: str,
+        currency: str,
+        user_id: int,
+        monthly_income: Decimal,
+        email: str = "",
+        password_hash: str = "",
+    ):
         name = name.strip()
 
         if not name:
@@ -12,12 +20,16 @@ class UserProfile:
 
         if name.isdigit():
             raise ValueError("Name cannot be a number.")
-        
-        if currency not in  ("USD", "LBP"):
+
+        if currency not in ("USD", "LBP"):
             raise ValueError("currency should be LBP OR USD!!")
 
         if user_id <= 0:
             raise ValueError("User ID must be greater than zero.")
+
+        email = email.strip().lower()
+        if email and "@" not in email:
+            raise ValueError("Enter a valid email address.")
 
         monthly_income = Decimal(str(monthly_income))
 
@@ -28,6 +40,8 @@ class UserProfile:
         self.currency = currency.strip().upper()
         self.user_id = user_id
         self.monthly_income = monthly_income
+        self.email = email
+        self.password_hash = password_hash
 
     def __str__(self) -> str:
         return (
