@@ -1,2 +1,4 @@
 mysql-connector-python>=9.0,<10.0
 SQLAlchemy>=2.0,<3.0
+flask
+flask_wtf

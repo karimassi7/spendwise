@@ -1,0 +1,26 @@
+{% macro money(amount, currency) -%}
+  {{ '{:,.2f}'.format(amount|float) }} {{ currency }}
+{%- endmacro %}
+
+{% macro status_badge(status) -%}
+  {% if status == 'Over budget' %}
+    <span class="badge bg-danger-subtle text-danger-emphasis">{{ status }}</span>
+  {% elif status == 'Budget limit reached' %}
+    <span class="badge bg-warning-subtle text-warning-emphasis">{{ status }}</span>
+  {% elif status == 'Warning: Near budget limit' %}
+    <span class="badge bg-warning-subtle text-dark">{{ status }}</span>
+  {% else %}
+    <span class="badge bg-success-subtle text-success-emphasis">{{ status }}</span>
+  {% endif %}
+{%- endmacro %}
+
+{% macro progress_bar(percent, status='') -%}
+  {% set p = percent|float %}
+  {% if p > 100 %}
+    {% set p = 100 %}
+  {% endif %}
+  <div class="progress budget-progress">
+    <div class="progress-bar {% if status == 'Over budget' %}bg-danger{% elif p >= 80 %}bg-warning{% else %}bg-success{% endif %}"
+         role="progressbar" style="width: {{ p }}%" aria-valuenow="{{ p }}" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+{%- endmacro %}

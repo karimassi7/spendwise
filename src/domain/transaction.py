@@ -18,7 +18,6 @@ class Transaction:
         description: str,
         transaction_date: date,
     ):
-
         if transaction_id <= 0:
             raise ValueError("Enter a valid transaction ID.")
         self.transaction_id = transaction_id

@@ -1,14 +1,20 @@
 # SpendWise
 
-SpendWise is a command-line personal finance application written in Python. It helps multiple users organize their finances while keeping every profile's records separate.
+SpendWise is a web-based personal finance application written in Python with Flask.
+It helps multiple users organize their finances while keeping every profile's
+records separate and secure behind email/password authentication.
 
 ## Features
 
-- Create, select, update, and delete multiple profiles.
-- Manage accounts, income, expenses, and spending categories.
-- Create budgets and monitor spending progress.
+- Secure sign up / sign in with password hashing and per-user data isolation.
+- Manage accounts (cash / bank / savings) and track total balances.
+- Record income and expenses with search, filters, and sorting.
+- Create spending categories (income / expense).
+- Create budgets per category and monitor spending progress.
 - Create savings goals and record contributions.
-- View balances, monthly summaries, and a financial dashboard.
+- Dashboard with monthly income-vs-expense charts (Chart.js), budget progress,
+  savings progress, and recent transactions.
+- Update your profile (name, currency, monthly income) and change your password.
 - Store application data in MySQL with foreign-key protection.
 - Delete a profile together with only the financial data it owns.
 
@@ -21,8 +27,8 @@ layers:
 - `repositories`: MySQL persistence and data retrieval.
 - `database`: Connection settings, schema initialization.
 - `service`: Business rules and profile-scoped operations.
-- `presentation`: Command-line menus, formatting, and user interaction.
-- `tests`: Automated tests for profile isolation and menu behavior.
+- `webapp`: Flask application factory, controllers, templates, and static assets.
+- `tests`: Automated tests for domain rules and web flows.
 
 ## Run the Application
 
@@ -37,8 +43,25 @@ python -m pip install -e .
 Then run the application with either entry point:
 
 ```powershell
-python -m main
+python run.py
+python -m webapp
 spendwise
+```
+
+Open http://127.0.0.1:5000 in your browser and create an account.
+
+## Configuration
+
+Create a `.env` file at the repository root (or rely on the defaults):
+
+```
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=
+MYSQL_DATABASE=spendwise
+FLASK_SECRET_KEY=change-me
+FLASK_DEBUG=0
 ```
 
 ## Database Setup
@@ -50,8 +73,4 @@ python -m database.setup_database
 ```
 
 The default connection is `root` with an empty password on
-`127.0.0.1:3306`. Override it with `MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_USER`,
-`MYSQL_PASSWORD`, and `MYSQL_DATABASE` environment variables.
-
-Create or select a profile before managing accounts, transactions, budgets,
-categories, or savings goals.
+`127.0.0.1:3306`. Override it with the `MYSQL_*` environment variables above.

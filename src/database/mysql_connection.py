@@ -7,7 +7,6 @@ from contextlib import contextmanager
 import mysql.connector
 from mysql.connector import Error, MySQLConnection
 
-
 def _connection_settings(include_database: bool = True) -> dict[str, object]:
 
     settings: dict[str, object] = {

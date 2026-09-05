@@ -9,12 +9,14 @@ class ProfileRepository:
 
     @staticmethod
     def _from_row(row: tuple[object, ...]) -> UserProfile:
-        user_id, name, currency, monthly_income = row
+        user_id, email, password_hash, name, currency, monthly_income = row
         return UserProfile(
             name=str(name),
             currency=str(currency),
             user_id=int(user_id),
             monthly_income=Decimal(str(monthly_income)),
+            email=str(email),
+            password_hash=str(password_hash),
         )
 
     def add(self, profile: UserProfile) -> UserProfile:
@@ -23,10 +25,16 @@ class ProfileRepository:
         try:
             cursor.execute(
                 """
-                INSERT INTO users (name, currency, monthly_income)
-                VALUES (%s, %s, %s)
+                INSERT INTO users (email, password_hash, name, currency, monthly_income)
+                VALUES (%s, %s, %s, %s, %s)
                 """,
-                (profile.name, profile.currency, profile.monthly_income),
+                (
+                    profile.email,
+                    profile.password_hash,
+                    profile.name,
+                    profile.currency,
+                    profile.monthly_income,
+                ),
             )
             connection.commit()
             profile.user_id = int(cursor.lastrowid)
@@ -41,10 +49,13 @@ class ProfileRepository:
     def update(self, profile: UserProfile) -> bool:
         return self._write(
             """
-            UPDATE users SET name = %s, currency = %s, monthly_income = %s
+            UPDATE users SET email = %s, password_hash = %s,
+                name = %s, currency = %s, monthly_income = %s
             WHERE user_id = %s
             """,
             (
+                profile.email,
+                profile.password_hash,
                 profile.name,
                 profile.currency,
                 profile.monthly_income,
@@ -75,7 +86,7 @@ class ProfileRepository:
         try:
             cursor.execute(
                 """
-                SELECT user_id, name, currency, monthly_income
+                SELECT user_id, email, password_hash, name, currency, monthly_income
                 FROM users ORDER BY user_id
                 """
             )
@@ -90,10 +101,27 @@ class ProfileRepository:
         try:
             cursor.execute(
                 """
-                SELECT user_id, name, currency, monthly_income
+                SELECT user_id, email, password_hash, name, currency, monthly_income
                 FROM users WHERE user_id = %s
                 """,
                 (user_id,),
+            )
+            row = cursor.fetchone()
+            return self._from_row(row) if row is not None else None
+        finally:
+            cursor.close()
+            connection.close()
+
+    def get_by_email(self, email: str) -> UserProfile | None:
+        connection = get_connection()
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                """
+                SELECT user_id, email, password_hash, name, currency, monthly_income
+                FROM users WHERE email = %s
+                """,
+                (email.strip().lower(),),
             )
             row = cursor.fetchone()
             return self._from_row(row) if row is not None else None

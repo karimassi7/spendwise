@@ -5,18 +5,21 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "spendwise"
 version = "0.1.0"
-description = "A command-line personal finance application."
+description = "A web-based personal finance application."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "mysql-connector-python>=9.0,<10.0",
+    "SQLAlchemy>=2.0,<3.0",
+    "flask>=3.0",
+    "flask_wtf",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<9"]
 
 [project.scripts]
-spendwise = "main:main"
+spendwise = "webapp.app:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

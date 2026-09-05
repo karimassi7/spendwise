@@ -1,0 +1,13 @@
+<li class="list-group-item d-flex justify-content-between align-items-center">
+  <span><span class="badge {% if c.category_type == 'income' %}bg-success-subtle text-success-emphasis{% else %}bg-danger-subtle text-danger-emphasis{% endif %} me-2">
+    {{ c.name }}</span></span>
+  <div class="btn-group btn-group-sm">
+    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
+            data-id="{{ c.category_id }}" data-name="{{ c.name }}" data-type="{{ c.category_type }}">
+      <i class="bi bi-pencil"></i></button>
+    <form method="post" action="{{ url_for('category.delete', category_id=c.category_id) }}"
+          onsubmit="return confirm('Delete this category?');">
+      <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+    </form>
+  </div>
+</li>

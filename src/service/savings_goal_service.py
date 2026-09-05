@@ -33,8 +33,6 @@ class SavingsGoalService:
             raise ValueError("Saved amount cannot exceed target amount")
         if not isinstance(deadline, date):
             raise TypeError("Please enter a valid deadline")
-        if deadline < datetime.now().astimezone().date():
-            raise ValueError("Deadline cannot be in the past")
 
         goal = SavingsGoal(
             # MySQL replaces this temporary valid ID with AUTO_INCREMENT.
@@ -87,8 +85,6 @@ class SavingsGoalService:
             raise ValueError("Saved amount cannot exceed target amount.")
         if not isinstance(deadline, date):
             raise TypeError("Please enter a valid deadline.")
-        if deadline < datetime.now().astimezone().date():
-            raise ValueError("Deadline cannot be in the past.")
 
         updated_goal = SavingsGoal(
             goal_id=goal_id,

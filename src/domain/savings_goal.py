@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date
 from decimal import Decimal
 
 
@@ -41,8 +41,6 @@ class SavingsGoal:
         if not isinstance(deadline, date):
             raise TypeError("Deadline must be a date object")
 
-        if deadline < datetime.now().astimezone().date():
-            raise ValueError("Deadline cannot be in the past")
         self.deadline = deadline
 
     def __str__(self) -> str:
