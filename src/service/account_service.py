@@ -41,7 +41,7 @@ class AccountService:
             raise ValueError("An account with this name already exists.")
 
         new_account = Account(
-            # MySQL replaces this temporary valid ID with AUTO_INCREMENT.
+            # PostgreSQL replaces this temporary valid ID with an identity value.
             account_id=1,
             profile_id=profile_id,
             name=name,

@@ -1,11 +1,11 @@
 from decimal import Decimal
 
-from database.mysql_connection import get_connection
+from database.postgres_connection import get_connection
 from domain.account import Account
 
 
 class AccountRepository:
-    """Persist and retrieve accounts from MySQL."""
+    """Persist and retrieve accounts from PostgreSQL."""
 
     @staticmethod
     def _from_row(row: tuple[object, ...]) -> Account:
@@ -26,6 +26,7 @@ class AccountRepository:
                 """
                 INSERT INTO accounts (user_id, name, balance, account_type)
                 VALUES (%s, %s, %s, %s)
+                RETURNING account_id
                 """,
                 (
                     account.profile_id,
@@ -35,7 +36,7 @@ class AccountRepository:
                 ),
             )
             connection.commit()
-            account.account_id = int(cursor.lastrowid)
+            account.account_id = int(cursor.fetchone()[0])
             return account
         except Exception:
             connection.rollback()

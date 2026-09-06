@@ -55,7 +55,7 @@ class BudgetService:
             raise ValueError("A budget must use an expense category.")
 
         budget = Budget(
-            # MySQL replaces this temporary valid ID with AUTO_INCREMENT.
+            # PostgreSQL replaces this temporary valid ID with an identity value.
             budget_id=1,
             profile_id=profile_id,
             category=category,

@@ -1,6 +1,6 @@
-"""Database utilities for SpendWise."""
+"""PostgreSQL database utilities for SpendWise."""
 
-from database.mysql_connection import (
+from database.postgres_connection import (
     database_connection,
     get_connection,
     test_connection,

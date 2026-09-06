@@ -1,7 +1,7 @@
 from datetime import date
 from decimal import Decimal
 
-from database.mysql_connection import get_connection
+from database.postgres_connection import get_connection
 from domain.transaction import Transaction
 from repositories.account_repository import AccountRepository
 from repositories.category_repository import CategoryRepository
@@ -57,6 +57,7 @@ class TransactionRepository:
                     (user_id, account_id, category_id, amount,
                      description, transaction_date)
                 VALUES (%s, %s, %s, %s, %s, %s)
+                RETURNING transaction_id
                 """,
                 (
                     transaction.profile_id,
@@ -68,7 +69,7 @@ class TransactionRepository:
                 ),
             )
             connection.commit()
-            transaction.transaction_id = int(cursor.lastrowid)
+            transaction.transaction_id = int(cursor.fetchone()[0])
             return transaction
         except Exception:
             connection.rollback()

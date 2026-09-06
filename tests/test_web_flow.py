@@ -1,7 +1,7 @@
 """End-to-end web flow tests using the Flask test client.
 
 These tests exercise authentication and per-user data isolation against the
-real MySQL database configured through the MYSQL_* environment variables.
+real PostgreSQL database configured through the DATABASE_URL environment variable.
 Each test cleans up the user it creates.
 """
 

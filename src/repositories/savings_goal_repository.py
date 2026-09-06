@@ -1,14 +1,14 @@
-"""MySQL persistence for savings goals."""
+"""PostgreSQL persistence for savings goals."""
 
 from datetime import date
 from decimal import Decimal
 
-from database.mysql_connection import get_connection
+from database.postgres_connection import get_connection
 from domain.savings_goal import SavingsGoal
 
 
 class SavingsGoalRepository:
-    """Persist and retrieve savings goals from MySQL."""
+    """Persist and retrieve savings goals from PostgreSQL."""
 
     @staticmethod
     def _as_date(value: object) -> date:
@@ -35,6 +35,7 @@ class SavingsGoalRepository:
                 INSERT INTO savings_goals
                     (user_id, name, target_amount, saved_amount, deadline)
                 VALUES (%s, %s, %s, %s, %s)
+                RETURNING goal_id
                 """,
                 (
                     goal.profile_id,
@@ -45,7 +46,7 @@ class SavingsGoalRepository:
                 ),
             )
             connection.commit()
-            goal.goal_id = int(cursor.lastrowid)
+            goal.goal_id = int(cursor.fetchone()[0])
             return goal
         except Exception:
             connection.rollback()

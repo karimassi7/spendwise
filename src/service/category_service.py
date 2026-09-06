@@ -20,7 +20,7 @@ class CategoryService:
             raise ValueError("Category type must be 'income' or 'expense'.")
         # duplicate name allowed
         category = Category(
-            # MySQL replaces this temporary valid ID with AUTO_INCREMENT.
+            # PostgreSQL replaces this temporary valid ID with an identity value.
             category_id=1,
             profile_id=profile_id,
             name=name,

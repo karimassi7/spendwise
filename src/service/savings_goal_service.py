@@ -35,7 +35,7 @@ class SavingsGoalService:
             raise TypeError("Please enter a valid deadline")
 
         goal = SavingsGoal(
-            # MySQL replaces this temporary valid ID with AUTO_INCREMENT.
+            # PostgreSQL replaces this temporary valid ID with an identity value.
             goal_id=1,
             profile_id=profile_id,
             name=name,

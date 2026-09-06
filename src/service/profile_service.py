@@ -27,7 +27,7 @@ class ProfileService:
         profile = UserProfile(
             name=name,
             currency=currency,
-            # MySQL replaces this temporary valid ID with AUTO_INCREMENT.
+            # PostgreSQL replaces this temporary valid ID with an identity value.
             user_id=1,
             monthly_income=monthly_income,
             email=email,

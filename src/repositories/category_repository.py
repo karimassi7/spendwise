@@ -1,11 +1,11 @@
-"""MySQL persistence for spending categories."""
+"""PostgreSQL persistence for spending categories."""
 
-from database.mysql_connection import get_connection
+from database.postgres_connection import get_connection
 from domain.spending_category import Category
 
 
 class CategoryRepository:
-    """Persist and retrieve categories from MySQL."""
+    """Persist and retrieve categories from PostgreSQL."""
 
     @staticmethod
     def _from_row(row: tuple[object, ...]) -> Category:
@@ -25,11 +25,12 @@ class CategoryRepository:
                 """
                 INSERT INTO categories (user_id, name, category_type)
                 VALUES (%s, %s, %s)
+                RETURNING category_id
                 """,
                 (category.profile_id, category.name, category.category_type),
             )
             connection.commit()
-            category.category_id = int(cursor.lastrowid)
+            category.category_id = int(cursor.fetchone()[0])
             return category
         except Exception:
             connection.rollback()

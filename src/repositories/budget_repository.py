@@ -1,15 +1,15 @@
-"""MySQL persistence for budgets."""
+"""PostgreSQL persistence for budgets."""
 
 from datetime import date
 from decimal import Decimal
 
-from database.mysql_connection import get_connection
+from database.postgres_connection import get_connection
 from domain.budget import Budget
 from repositories.category_repository import CategoryRepository
 
 
 class BudgetRepository:
-    """Persist and retrieve budgets from MySQL."""
+    """Persist and retrieve budgets from PostgreSQL."""
 
     def __init__(self, category_repository: CategoryRepository):
         self.category_repository = category_repository
@@ -42,6 +42,7 @@ class BudgetRepository:
                 INSERT INTO budgets
                     (user_id, category_id, limit_amount, from_date, to_date)
                 VALUES (%s, %s, %s, %s, %s)
+                RETURNING budget_id
                 """,
                 (
                     budget.profile_id,
@@ -52,7 +53,7 @@ class BudgetRepository:
                 ),
             )
             connection.commit()
-            budget.budget_id = int(cursor.lastrowid)
+            budget.budget_id = int(cursor.fetchone()[0])
             return budget
         except Exception:
             connection.rollback()

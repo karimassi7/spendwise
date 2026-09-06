@@ -1,26 +1,34 @@
 Metadata-Version: 2.4
 Name: spendwise
 Version: 0.1.0
-Summary: A command-line personal finance application.
+Summary: A web-based personal finance application.
 Requires-Python: >=3.10
 Description-Content-Type: text/markdown
-Requires-Dist: mysql-connector-python<10.0,>=9.0
-Requires-Dist: Flask<4.0,>=3.0
+Requires-Dist: psycopg[binary]<4.0,>=3.2
+Requires-Dist: SQLAlchemy<3.0,>=2.0
+Requires-Dist: flask>=3.0
+Requires-Dist: flask_wtf
 Provides-Extra: dev
 Requires-Dist: pytest<9,>=8; extra == "dev"
 
 # SpendWise
 
-SpendWise is a command-line personal finance application written in Python. It helps multiple users organize their finances while keeping every profile's records separate.
+SpendWise is a web-based personal finance application written in Python with Flask.
+It helps multiple users organize their finances while keeping every profile's
+records separate and secure behind email/password authentication.
 
 ## Features
 
-- Create, select, update, and delete multiple profiles.
-- Manage accounts, income, expenses, and spending categories.
-- Create budgets and monitor spending progress.
+- Secure sign up / sign in with password hashing and per-user data isolation.
+- Manage accounts (cash / bank / savings) and track total balances.
+- Record income and expenses with search, filters, and sorting.
+- Create spending categories (income / expense).
+- Create budgets per category and monitor spending progress.
 - Create savings goals and record contributions.
-- View balances, monthly summaries, and a financial dashboard.
-- Store application data in MySQL with foreign-key protection.
+- Dashboard with monthly income-vs-expense charts (Chart.js), budget progress,
+  savings progress, and recent transactions.
+- Update your profile (name, currency, monthly income) and change your password.
+- Store application data in PostgreSQL with foreign-key protection.
 - Delete a profile together with only the financial data it owns.
 
 ## Architecture
@@ -29,11 +37,11 @@ The application packages live directly under `src` and are organized into clear
 layers:
 
 - `domain`: Financial classes and validation rules.
-- `repositories`: MySQL persistence and data retrieval.
+- `repositories`: PostgreSQL persistence and data retrieval.
 - `database`: Connection settings, schema initialization.
 - `service`: Business rules and profile-scoped operations.
-- `presentation`: Command-line menus, formatting, and user interaction.
-- `tests`: Automated tests for profile isolation and menu behavior.
+- `webapp`: Flask application factory, controllers, templates, and static assets.
+- `tests`: Automated tests for domain rules and web flows.
 
 ## Run the Application
 
@@ -48,22 +56,22 @@ python -m pip install -e .
 Then run the application with either entry point:
 
 ```powershell
-python -m main
+python run.py
+python -m webapp
 spendwise
 ```
 
-## Run the Web App
+Open http://127.0.0.1:5000 in your browser and create an account.
 
-Initialize the database (this also adds the login fields when upgrading an
-existing SpendWise database), then start Flask:
+## Configuration
 
-```powershell
-python -m database.setup_database
-python app.py
+Create a `.env` file at the repository root (or rely on the defaults):
+
 ```
-
-Open `http://127.0.0.1:5000`, create an account, and sign in. Set
-`FLASK_SECRET_KEY` to a long random value before deploying the app.
+DATABASE_URL=postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require
+FLASK_SECRET_KEY=change-me
+FLASK_DEBUG=0
+```
 
 ## Database Setup
 
@@ -73,9 +81,4 @@ Initialize the database after installing the project:
 python -m database.setup_database
 ```
 
-The default connection is `root` with an empty password on
-`127.0.0.1:3306`. Override it with `MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_USER`,
-`MYSQL_PASSWORD`, and `MYSQL_DATABASE` environment variables.
-
-Create or select a profile before managing accounts, transactions, budgets,
-categories, or savings goals.
+Set `DATABASE_URL` to the PostgreSQL connection URL supplied by your provider.

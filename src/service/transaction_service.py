@@ -124,7 +124,7 @@ class TransactionService:
             existing_account.balance -= amount
 
         transaction_object = Transaction(
-            # MySQL replaces this temporary valid ID with AUTO_INCREMENT.
+            # PostgreSQL replaces this temporary valid ID with an identity value.
             transaction_id=1,
             profile_id=profile_id,
             account=existing_account,

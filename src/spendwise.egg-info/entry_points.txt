@@ -1,2 +1,2 @@
 [console_scripts]
-spendwise = main:main
+spendwise = webapp.app:main

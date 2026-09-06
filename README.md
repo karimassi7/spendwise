@@ -15,7 +15,7 @@ records separate and secure behind email/password authentication.
 - Dashboard with monthly income-vs-expense charts (Chart.js), budget progress,
   savings progress, and recent transactions.
 - Update your profile (name, currency, monthly income) and change your password.
-- Store application data in MySQL with foreign-key protection.
+- Store application data in PostgreSQL with foreign-key protection.
 - Delete a profile together with only the financial data it owns.
 
 ## Architecture
@@ -24,7 +24,7 @@ The application packages live directly under `src` and are organized into clear
 layers:
 
 - `domain`: Financial classes and validation rules.
-- `repositories`: MySQL persistence and data retrieval.
+- `repositories`: PostgreSQL persistence and data retrieval.
 - `database`: Connection settings, schema initialization.
 - `service`: Business rules and profile-scoped operations.
 - `webapp`: Flask application factory, controllers, templates, and static assets.
@@ -55,11 +55,7 @@ Open http://127.0.0.1:5000 in your browser and create an account.
 Create a `.env` file at the repository root (or rely on the defaults):
 
 ```
-MYSQL_HOST=127.0.0.1
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=
-MYSQL_DATABASE=spendwise
+DATABASE_URL=postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require
 FLASK_SECRET_KEY=change-me
 FLASK_DEBUG=0
 ```
@@ -72,5 +68,4 @@ Initialize the database after installing the project:
 python -m database.setup_database
 ```
 
-The default connection is `root` with an empty password on
-`127.0.0.1:3306`. Override it with the `MYSQL_*` environment variables above.
+Set `DATABASE_URL` to the PostgreSQL connection URL supplied by your provider.
